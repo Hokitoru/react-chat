@@ -1,17 +1,21 @@
 import './App.css';
+import {useState} from "react";
 
 function App() {
-  var pusher = new Pusher("2f71376229e26c9aba7c", {
-    cluster: "eu",
-  });
-  var channel = pusher.subscribe("my-channel");
+    let socket = new WebSocket("ws://localhost:8080");
 
-  channel.bind("my-event", (data) => {
-    // Method to be dispatched on trigger.
-  });
+    socket.onMessage = (event) => console.log(event);
+
+    socket.send(JSON.stringify({
+        type: 'message',
+        username: 'siran',
+        text: 'hello, world'
+    }))
 
   return (
-    <div></div>
+    <div>
+        <button>Отправить</button>
+    </div>
   );
 }
 

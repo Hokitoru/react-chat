@@ -1,20 +1,38 @@
 import './App.css';
-import {useState} from "react";
+import {useEffect, useRef, useState} from "react";
 
 function App() {
-    let socket = new WebSocket("ws://localhost:8080");
 
-    socket.onMessage = (event) => console.log(event);
+    const ws = useRef(null);
 
-    socket.send(JSON.stringify({
-        type: 'message',
-        username: 'siran',
-        text: 'hello, world'
-    }))
+    useEffect(() => {
+        ws.current = new WebSocket("ws://localhost:8080");
+        ws.current.onopen = () => console.log("ws opened");
+        ws.current.onclose = () => console.log("ws closed");
+
+        ws.current.onmessage = (message) => console.log(message);
+
+        const wsCurrent = ws.current;
+
+        return () => {
+            wsCurrent.close();
+        };
+    }, []);
+
+
+
+    const sendMes = () => {
+        ws.current.send(JSON.stringify({
+            type: 'message',
+            username: 'siran',
+            text: 'hello, world'
+        }))
+    }
+
 
   return (
     <div>
-        <button>Отправить</button>
+        <button onClick={() => sendMes()}>Отправить</button>
     </div>
   );
 }

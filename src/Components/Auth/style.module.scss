@@ -1,0 +1,26 @@
+.auth{
+  width: 320px;
+  display: flex;
+  flex-direction: column;
+
+
+  div{
+    width: 150px;
+    height: 150px;
+    margin: 0 auto 20px auto;
+    background: white;
+    border-radius: 50%;
+    border: darkred 2px solid;
+  }
+
+  input{
+    width: 300px;
+    outline: none;
+    border-radius: 15px;
+    border: darkred 2px solid;
+    height: 40px;
+    font-size: 30px;
+    margin: 0 auto;
+    padding: 0 0 0 5px;
+  }
+}

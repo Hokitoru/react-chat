@@ -1,10 +1,12 @@
 import express from 'express';
 import fs from 'fs/promises';
+import cors from 'cors';
 
 const imageMiddleware = () => express.raw({ type: '*/*', limit: '25mb' });
 
 export const httpServerInit = () => {
     const app = express();
+    app.use(cors());
 
     app.post('/user/:username/avatar', imageMiddleware(), async (req, res) => {
         const { username } = req.params;

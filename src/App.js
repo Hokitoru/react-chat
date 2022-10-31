@@ -11,6 +11,7 @@ function App() {
     const [login, setLogin] = useState('');
     const [switcher, setSwitcher] = useState(false);
     const ws = useRef(null);
+    const [src, setSrc] = useState('');
 
     const generateId = () => Date.now().toString(36) + Math.random().toString(36).substr(2);
 

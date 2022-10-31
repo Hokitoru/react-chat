@@ -1,12 +1,11 @@
 import React, {useRef, useState} from 'react';
 import classes from './style.module.scss'
 
-const Auth = ({setLogin, switcher, setSwitcher}) => {
-
+const Auth = ({src, setSrc, setLogin, showChat, setShowChat}) => {
     const getAuth = (event) => {
         if(event.key === 'Enter'){
             setLogin(event.target.value);
-            setSwitcher(!switcher);
+            setShowChat(!showChat);
         }
     }
 
@@ -23,8 +22,10 @@ const Auth = ({setLogin, switcher, setSwitcher}) => {
 
     return (
         <div className={classes.auth}>
-            <input type="file" onChange={getFile}/>
-            <img src={src} alt="src"/>
+            {
+                src ? <img src={src} alt="src"/> : <input className={classes.avatar} type="file" title="" onChange={getFile}/>
+            }
+
             <input type="text" onKeyUp={event => getAuth(event)}/>
         </div>
     );

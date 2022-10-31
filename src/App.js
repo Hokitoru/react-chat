@@ -9,7 +9,7 @@ import InputMes from "./Components/InputMes/InputMes";
 function App() {
     const [messageList, setMessageList] = useState([]);
     const [login, setLogin] = useState('');
-    const [switcher, setSwitcher] = useState(false);
+    const [showChat, setShowChat] = useState(false);
     const ws = useRef(null);
     const [src, setSrc] = useState('');
 
@@ -50,13 +50,13 @@ function App() {
         <Header></Header>
         <div className={classes.content}>
             {
-                !switcher ?
-                    <Auth setLogin={setLogin} switcher={switcher} setSwitcher={setSwitcher}></Auth>
-                    :
+                showChat ?
                     <div className={classes.chat}>
                         <MesList login={login} messageList={messageList}></MesList>
                         <InputMes login={login} sendMes={(login, message) => sendMes(login, message)}></InputMes>
                     </div>
+                    :
+                    <Auth src={src} setSrc={setSrc} setLogin={setLogin} switcher={showChat} setSwitcher={setShowChat}></Auth>
             }
         </div>
     </div>

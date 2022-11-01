@@ -22,7 +22,6 @@ function App() {
         ws.current.onclose = () => console.log("ws closed");
 
         ws.current.onmessage = (message) => {
-            console.log(messageList);
             const obj = JSON.parse(message.data);
             obj.id = generateId();
             setMessageList(prev => ([...prev, obj]))
@@ -34,8 +33,6 @@ function App() {
             wsCurrent.close();
         };
     }, []);
-
-    console.log(messageList);
 
     const sendMes = (login, message) => {
         ws.current.send(JSON.stringify({
@@ -52,11 +49,11 @@ function App() {
             {
                 showChat ?
                     <div className={classes.chat}>
-                        <MesList login={login} messageList={messageList}></MesList>
+                        <MesList src={src} login={login} messageList={messageList}></MesList>
                         <InputMes login={login} sendMes={(login, message) => sendMes(login, message)}></InputMes>
                     </div>
                     :
-                    <Auth src={src} setSrc={setSrc} setLogin={setLogin} switcher={showChat} setSwitcher={setShowChat}></Auth>
+                    <Auth src={src} setSrc={setSrc} login={login} setLogin={setLogin} showChat={showChat} setShowChat={setShowChat}></Auth>
             }
         </div>
     </div>

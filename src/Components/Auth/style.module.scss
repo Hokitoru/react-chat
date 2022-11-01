@@ -5,12 +5,36 @@
 
 
   div{
-    width: 150px;
-    height: 150px;
-    margin: 0 auto 20px auto;
-    background: white;
-    border-radius: 50%;
-    border: darkred 2px solid;
+    width: 300px;
+    height: 250px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+
+    img{
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      border: 2px solid darkred;
+    }
+
+    button{
+      padding: 15px 25px;
+      width: 100%;
+      border-radius: 15px;
+      border: 2px solid darkred;
+      background-color: white;
+      color: darkred;
+      font-size: 22px;
+    }
+
+    button:hover{
+      cursor: pointer;
+      border: 2px #fff solid;
+      background-color: darkred;
+      color: #fff;
+    }
   }
 
   input{

@@ -17,6 +17,15 @@
     min-height: 50px;
     margin-bottom: 20px;
 
+    img{
+      width: 50px;
+      height: 50px;
+      order: 1;
+      margin-left: 10px;
+      border-radius: 50%;
+      border: 1px solid darkred;
+    }
+
     & > div:last-child{
       padding: 10px;
 
@@ -59,11 +68,16 @@
 .mesListElemSecondary{
   justify-content: flex-start;
 
+  img{
+    margin-right: 10px;
+  }
+
   & > div:first-child{
     margin-right: 20px;
   }
 
   & > div:last-child{
+    order: 1;
     background-color: #fff;
     border-radius: 0 15px 15px 15px;
   }

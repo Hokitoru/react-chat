@@ -1,21 +1,24 @@
 import React, {useRef, useState} from 'react';
 import classes from './style.module.scss'
 
-const Auth = ({src, setSrc, setLogin, showChat, setShowChat}) => {
-    const getAuth = (event) => {
+const Auth = ({src, setSrc, login, setLogin, showChat, setShowChat}) => {
+    const [showAvatarChanger, setShowAvatarChanger] = useState(false);
+
+    const getUsername = (event) => {
         if(event.key === 'Enter'){
             setLogin(event.target.value);
-            setShowChat(!showChat);
+            setShowAvatarChanger(!showAvatarChanger);
         }
     }
 
     const getFile = async (event) => {
-        await fetch(`http://localhost:3000/user/Hokitoru/avatar`, {
+        const imageAdress = 'http://localhost:3000/user/' + login + '/avatar';
+        await fetch(imageAdress, {
             method: 'POST',
             body: event.target.files[0],
         })
 
-        const response = await fetch(`http://localhost:3000/user/Hokitoru/avatar`);
+        const response = await fetch(imageAdress);
         const result = await response.blob();
         setSrc(URL.createObjectURL(result));
     }
@@ -23,10 +26,18 @@ const Auth = ({src, setSrc, setLogin, showChat, setShowChat}) => {
     return (
         <div className={classes.auth}>
             {
-                src ? <img src={src} alt="src"/> : <input className={classes.avatar} type="file" title="" onChange={getFile}/>
+                showAvatarChanger ?
+                    src ?
+                        <div>
+                            <img src={src} alt="src"/>
+                            <button onClick={() => setShowChat(!showChat)}>Закончить регистрацию</button>
+                        </div>
+                        :
+                        <input className={classes.avatar} type="file" title="" onChange={getFile}/>
+                    : <input type="text" onKeyUp={event => getUsername(event)}/>
             }
 
-            <input type="text" onKeyUp={event => getAuth(event)}/>
+
         </div>
     );
 };
